@@ -32,9 +32,6 @@ pip install ./cuda_package/diff-gaussian-rasterization
 
 # Install nvdiffrast (for Envlight).
 pip install ./cuda_package/nvdiffrast
-
-# Install the Waymo Open Dataset reader.
-pip install ./cuda_package/simple-waymo-open-dataset-reader
 ```
 
 ### Data preparation
@@ -109,12 +106,11 @@ SurfaceGS uses code from a few open source repositories. Without the efforts of 
 ## 📜 BibTeX
 
 ```bibtex
-@InProceedings{Ge_2026_CVPR,
-    author    = {Ge, Fudong and Liu, Dingning and Wang, Hanshi and Zhang, Yiwei and Gao, Jin and Hu, Weiming and Zhang, Zhipeng},
-    title     = {SurfaceGS: Dynamic Surface Gaussian Splatting for Urban Driving Scenes},
-    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Findings},
-    month     = {June},
-    year      = {2026},
-    pages     = {900-909}
+@inproceedings{ge2026surfacegs,
+  title={SurfaceGS: Dynamic Surface Gaussian Splatting for Urban Driving Scenes},
+  author={Ge, Fudong and Liu, Dingning and Wang, Hanshi and Zhang, Yiwei and Gao, Jin and Hu, Weiming and Zhang, Zhipeng},
+  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
+  pages={900--909},
+  year={2026}
 }
 ```
