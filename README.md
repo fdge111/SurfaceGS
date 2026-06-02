@@ -1,5 +1,15 @@
 # SurfaceGS: Dynamic Surface Gaussian Splatting for Urban Driving Scenes
 
+### [[Paper]](https://openaccess.thecvf.com/content/CVPR2026F/html/Ge_SurfaceGS_Dynamic_Surface_Gaussian_Splatting_for_Urban_Driving_Scenes_CVPRF_2026_paper.html)
+
+> [**SurfaceGS: Dynamic Surface Gaussian Splatting for Urban Driving Scenes**](https://openaccess.thecvf.com/content/CVPR2026F/html/Ge_SurfaceGS_Dynamic_Surface_Gaussian_Splatting_for_Urban_Driving_Scenes_CVPRF_2026_paper.html)<br>
+> Fudong Ge, Dingning Liu, Hanshi Wang, Yiwei Zhang, Jin Gao, Weiming Hu, Zhipeng Zhang<br>
+> **State Key Laboratory of Multimodal Artificial Intelligence Systems (MAIS), CASIA**<br>
+> **AutoLab, School of Artificial Intelligence, Shanghai Jiao Tong University**<br>
+> **CVPR 2026 Findings**
+
+**Official implementation of "SurfaceGS: Dynamic Surface Gaussian Splatting for Urban Driving Scenes".**
+
 ## 🚀 Get started
 ### Environment
 ```bash
@@ -14,17 +24,17 @@ conda activate surfacegs
 # Install requirements.
 pip install -r requirements.txt
 
-# Install simple-knn
-git clone https://gitlab.inria.fr/bkerbl/simple-knn.git
-pip install ./simple-knn
+# Install simple-knn.
+pip install ./cuda_package/simple-knn
 
-# a modified gaussian splatting (for feature rendering)
-git clone --recursive https://github.com/SuLvXiangXin/diff-gaussian-rasterization
-pip install ./diff-gaussian-rasterization
+# Install the modified Gaussian splatting rasterizer (for feature rendering).
+pip install ./cuda_package/diff-gaussian-rasterization
 
-# Install nvdiffrast (for Envlight)
-git clone https://github.com/NVlabs/nvdiffrast
-pip install ./nvdiffrast
+# Install nvdiffrast (for Envlight).
+pip install ./cuda_package/nvdiffrast
+
+# Install the Waymo Open Dataset reader.
+pip install ./cuda_package/simple-waymo-open-dataset-reader
 ```
 
 ### Data preparation
@@ -58,12 +68,12 @@ Install GroundingDINO following this [repo](https://github.com/IDEA-Research/Gro
 python script/waymo/generate_sky_mask.py --datadir DATA_DIR --sam_checkpoint SAM_CHECKPOINT
 ```
 
-Generating intance segmentation
+Generating instance segmentation
 ```bash
 git clone https://github.com/xiao10ma/Grounded-Segment-Anything.git
 cd Grounded-Segment-Anything
 ```
-follow the instruction in the repo to install the dependencies.
+Follow the instructions in the repo to install the dependencies.
 
 Run the following command to generate the instance segmentation.
 ```bash
@@ -73,26 +83,38 @@ bash waymo_run.sh
 
 ### Training
 
-## Novel View Synthesis
-```
+#### Novel View Synthesis
+```bash
 bash run/run_waymo_nvs.sh
 ```
 
-## Reconstruction
-```
+#### Reconstruction
+```bash
 bash run/run_waymo_reconstruction.sh
 ```
 
 
+### Acknowledgments
+
+SurfaceGS uses code from a few open source repositories. Without the efforts of these folks (and their willingness to release their implementations), SurfaceGS would not be possible. We thank these authors for their efforts!
+
+- [EmerNeRF](https://github.com/NVlabs/EmerNeRF)
+- [PVG](https://github.com/fudan-zvg/PVG)
+- [BezierGS](https://github.com/fudan-zvg/BezierGS)
+- [OmniRe](https://github.com/ziyc/drivestudio)
+- [gsplat](https://github.com/nerfstudio-project/gsplat)
+- [3DGS](https://github.com/graphdeco-inria/gaussian-splatting)
+
+
 ## 📜 BibTeX
 
-``` bibtex
-@inproceedings{ge2026surfacegs,
-  title={SurfaceGS: Dynamic Surface Gaussian Splatting for Urban Driving Scenes},
-  author={Ge, Fudong and Liu, Dingning and Wang, Hanshi and Zhang, Yiwei and Gao, Jin and Hu, Weiming and Zhang, Zhipeng},
-  booktitle={Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition},
-  pages={900--909},
-  year={2026}
-}
+```bibtex
+@InProceedings{Ge_2026_CVPR,
+    author    = {Ge, Fudong and Liu, Dingning and Wang, Hanshi and Zhang, Yiwei and Gao, Jin and Hu, Weiming and Zhang, Zhipeng},
+    title     = {SurfaceGS: Dynamic Surface Gaussian Splatting for Urban Driving Scenes},
+    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) Findings},
+    month     = {June},
+    year      = {2026},
+    pages     = {900-909}
 }
 ```
