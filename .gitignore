@@ -13,3 +13,15 @@ build/
 /*.png
 /*.mp4
 /dataset/
+/checkpoints/
+/external/
+
+# Local credentials and environment settings
+.env
+.env.*
+!.env.example
+.netrc
+.git-credentials
+.ssh/
+*.pem
+*.key

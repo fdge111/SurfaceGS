@@ -468,7 +468,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--base_config",
                         type=str,
-                        default="configs/base.yaml")
+                        default=os.path.join(os.path.dirname(os.path.abspath(__file__)), "configs", "base.yaml"))
 
     args, _ = parser.parse_known_args()
     

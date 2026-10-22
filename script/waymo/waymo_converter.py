@@ -524,22 +524,13 @@ def parse_seq_rawdata(process_list, root_dir, seq_name, seq_save_dir, track_file
         print("Saving dynamic mask done...")
 
 def main():
-    vs_debug = True
-
     parser = argparse.ArgumentParser()
     parser.add_argument('--process_list', type=str, nargs='+', default=['pose', 'calib', 'image', 'lidar', 'track', 'dynamic_mask'])
-    if not vs_debug:
-        parser.add_argument('--root_dir', type=str, default='dataset/waymo/raw')
-        parser.add_argument('--save_dir', type=str, default='dataset/waymo/processed')
-        parser.add_argument('--track_file', type=str, default="dataset/waymo/result.json")
-        parser.add_argument('--split_file', type=str)
-        parser.add_argument('--segment_file', type=str)
-    else:
-        parser.add_argument('--root_dir', type=str, default='dataset/waymo')
-        parser.add_argument('--save_dir', type=str, default='dataset/waymo/processed')
-        parser.add_argument('--track_file', type=str, default="dataset/waymo/result.json")
-        parser.add_argument('--split_file', type=str, default='script/waymo/waymo_splits/val_dynamic.txt')
-        parser.add_argument('--segment_file', type=str, default='script/waymo/waymo_splits/segment_list_val.txt')
+    parser.add_argument('--root_dir', type=str, required=True, help='Directory containing the input TFRecord files.')
+    parser.add_argument('--save_dir', type=str, required=True, help='Directory for the processed data.')
+    parser.add_argument('--track_file', type=str, default=None, help='Optional JSON file containing external tracking results.')
+    parser.add_argument('--split_file', type=str, required=True)
+    parser.add_argument('--segment_file', type=str, required=True)
     args = parser.parse_args()
     
     process_list = args.process_list

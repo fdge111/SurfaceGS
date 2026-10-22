@@ -50,6 +50,9 @@ Preprocess the example scenes
 python script/waymo/waymo_converter.py --root_dir TRAINING_SET_DIR --save_dir SAVE_DIR --split_file script/waymo/waymo_splits/demo.txt --segment_file script/waymo/waymo_splits/segment_list_train.txt
 ```
 
+Replace `TRAINING_SET_DIR` and `SAVE_DIR` with your local directories. Add
+`--track_file TRACKING_RESULTS.json` if you have external tracking results.
+
 Generating LiDAR depth
 
 
@@ -80,6 +83,10 @@ bash waymo_run.sh
 
 ### Training
 
+Set `SOURCE_PATH` and `MODEL_PATH` in the run script to your local dataset and
+output directories. The base configuration defaults to the repository's
+`configs/base.yaml`; use `--base_config` to select a different file.
+
 #### Novel View Synthesis
 ```bash
 bash run/run_waymo_nvs.sh
@@ -88,6 +95,21 @@ bash run/run_waymo_nvs.sh
 #### Reconstruction
 ```bash
 bash run/run_waymo_reconstruction.sh
+```
+
+### Evaluation
+
+Pass your dataset and model directories explicitly. Evaluation uses the latest
+checkpoint in `model_path`, or the file supplied through `checkpoint`.
+
+```bash
+python evaluate.py --config configs/waymo/nvs/017.yaml source_path=dataset/waymo/017 model_path=output/waymo_nvs/017
+```
+
+For monocular normal preprocessing with a separate DSINE checkout:
+
+```bash
+python script/waymo/generate_mono_normal.py --datadir dataset/waymo/017 --dsine_dir external/DSINE
 ```
 
 

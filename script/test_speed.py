@@ -11,7 +11,6 @@
 import glob
 import json
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '7'
 
 import torch
 import torch.nn.functional as F
@@ -25,7 +24,7 @@ from torchvision.utils import make_grid, save_image
 from omegaconf import OmegaConf
 
 EPS = 1e-5
-vs_debug = True
+vs_debug = False
 
 
 @torch.no_grad()
@@ -155,7 +154,7 @@ if __name__ == "__main__":
 
     parser.add_argument("--base_config",
                         type=str,
-                        default="configs/base.yaml")
+                        default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "configs", "base.yaml"))
 
     args, _ = parser.parse_known_args()
     
@@ -165,7 +164,6 @@ if __name__ == "__main__":
     args = OmegaConf.merge(base_conf, second_conf, cli_conf)
     args.resolution_scales = args.resolution_scales[:1]
 
-    args.checkpoint = "output/waymo_nvs/017/chkpnt30000.pth"
     if vs_debug:
         args.vs_debug = True
     else:
@@ -202,9 +200,12 @@ if __name__ == "__main__":
     else:
         pose_correction = None
 
-    checkpoints = glob.glob(os.path.join(args.model_path, "chkpnt*.pth"))
-    assert len(checkpoints) > 0, "No checkpoints found."
-    checkpoint = sorted(checkpoints, key=lambda x: int(x.split("chkpnt")[-1].split(".")[0]))[-1]
+    checkpoint = args.checkpoint
+    if not checkpoint:
+        checkpoints = glob.glob(os.path.join(args.model_path, "chkpnt*.pth"))
+        assert len(checkpoints) > 0, "No checkpoints found."
+        checkpoint = sorted(checkpoints, key=lambda x: int(x.split("chkpnt")[-1].split(".")[0]))[-1]
+    args.checkpoint = checkpoint
     (model_params, first_iter) = torch.load(checkpoint)
     gaussians.restore(model_params, args)
     
