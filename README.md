@@ -103,7 +103,7 @@ Pass your dataset and model directories explicitly. Evaluation uses the latest
 checkpoint in `model_path`, or the file supplied through `checkpoint`.
 
 ```bash
-python evaluate.py --config configs/waymo/nvs/017.yaml source_path=dataset/waymo/017 model_path=output/waymo_nvs/017
+python evaluate.py --config configs/waymo/017.yaml source_path=dataset/waymo/017 model_path=output/waymo_nvs/017
 ```
 
 For monocular normal preprocessing with a separate DSINE checkout:

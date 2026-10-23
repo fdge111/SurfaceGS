@@ -6,6 +6,6 @@ SOURCE_PATH=XXX
 MODEL_PATH=XXX
 
 CUDA_VISIBLE_DEVICES=$gpu_id python train.py \
---config configs/waymo/nvs/017.yaml \
+--config configs/waymo/017.yaml \
 source_path=$SOURCE_PATH \
 model_path=$MODEL_PATH

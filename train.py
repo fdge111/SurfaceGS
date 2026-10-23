@@ -455,7 +455,7 @@ if __name__ == "__main__":
         parser.add_argument("--vs_debug", type=bool, default=True)
         parser.add_argument("--config",
                             type=str,
-                            default='configs/waymo/nvs/017.yaml')
+                            default='configs/waymo/017.yaml')
         # parser.add_argument("--source_path",
         #                     type=str,
         #                     default="dataset/waymo/090")
